@@ -119,7 +119,6 @@ class displayASCII(tk.Frame):
         mButton.place(x = 490, y = 310, width = 200, height = 25)    
 
 
-
 class convToASCII(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -146,10 +145,11 @@ class convToASCII(tk.Frame):
                     ab = 0
             content = [x.strip() for x in content]
             for i in range(0,len(content)):
+                message = []
                 for x in range(0, len(content[i]), 3):
-                    asciiShown = tk.messagebox.showinfo(title="ASCII Art", message=(int(content[i][x:x+2]) * content[i][x+2], end=""))
+                    message.append(str(int(content[i][x:x+2]) * content[i][x+2]))
                     #print(int(content[i][x:x+2]) * content[i][x+2], end="") # This is the code for it to work on Python 
-
+                    asciiShown = tk.messagebox.showinfo(title="ASCII Art", message='\n'.join(message))
 
 
 

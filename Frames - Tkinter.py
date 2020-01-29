@@ -118,7 +118,6 @@ class displayASCII(tk.Frame):
                            command=lambda: controller.show_frame("MainMenu"))
         mButton.place(x = 490, y = 310, width = 200, height = 25)    
 
-
 class convToASCII(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -149,7 +148,7 @@ class convToASCII(tk.Frame):
                 for x in range(0, len(content[i]), 3):
                     message.append(str(int(content[i][x:x+2]) * content[i][x+2]))
                     #print(int(content[i][x:x+2]) * content[i][x+2], end="") # This is the code for it to work on Python 
-                    asciiShown = tk.messagebox.showinfo(title="ASCII Art", message='\n'.join(message))
+                asciiShown = tk.messagebox.showinfo(title="ASCII Art", message='\n'.join(message))
 
 
 
@@ -161,9 +160,6 @@ class convToASCII(tk.Frame):
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: controller.show_frame("MainMenu"))
         mButton.place(x = 490, y = 310, width = 200, height = 25)
-
-
-
 
 class convToRLE(tk.Frame):
 

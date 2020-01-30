@@ -108,15 +108,47 @@ class displayASCII(tk.Frame):
         label.pack(side="top", fill="x", pady=10)
 
 
+        IfileName = tk.Entry(self)
+        IfileName.place(x = 230, y = 125, width = 250, height = 40)
+        
+        def displayAS():
+            ab = 1
+            fileName = IfileName.get()
+            while ab == 1:
+                try:
+                    with open(f"{fileName}.txt") as f:
+                        content = f.readlines()#Opens file
+                    ab = 0
+                except (FileNotFoundError, OSError):
+                    noFile = tk.messagebox.showerror(title="No File", message="No file found - Please enter the name of the RLE file: ")
+                    ab = 0
+            content = [x.strip() for x in content]
+            message = []
+            for i in range(0, len(content)):
+                _line = []
+                for x in range(0, len(content[i]), 3):
+                    f = open(f"{fileName}.txt")
+                    fileRead = f.read()
+                    _line.append(f)
+            message.append(''.join(_line))
+            message = '\n'.join(message)
+
+            
+
+            asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
+            asciiShown.insert('1.0', message)
+            asciiShown.pack()
 
 
-
+        submitName = tk.Button(self, text="Submit",
+                               command=lambda: displayAS())
+        submitName.place(x = 230, y = 200, width = 250, height = 40)
 
 
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: controller.show_frame("MainMenu"))
-        mButton.place(x = 490, y = 310, width = 200, height = 25)    
+        mButton.place(x = 490, y = 310, width = 200, height = 25) 
 
 class convToASCII(tk.Frame):
 

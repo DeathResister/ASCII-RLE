@@ -143,12 +143,18 @@ class convToASCII(tk.Frame):
                     noFile = tk.messagebox.showerror(title="No File", message="No file found - Please enter the name of the RLE file: ")
                     ab = 0
             content = [x.strip() for x in content]
-            for i in range(0,len(content)):
-                message = []
+            message = []
+            for i in range(0, len(content)):
+                _line = []
                 for x in range(0, len(content[i]), 3):
-                    message.append(str(int(content[i][x:x+2]) * content[i][x+2]))
-                    #print(int(content[i][x:x+2]) * content[i][x+2], end="") # This is the code for it to work on Python 
-                asciiShown = tk.messagebox.showinfo(title="ASCII Art", message='\n'.join(message))
+                    row = str(int(content[i][x:x + 2]) * content[i][x + 2])
+                    _line.append(row)
+                message.append('\n'.join(_line))
+            message = '\n'.join(message)
+
+            asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
+            asciiShown.insert('1.0', message)
+            asciiShown.pack()
 
 
 

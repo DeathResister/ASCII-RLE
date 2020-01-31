@@ -99,6 +99,7 @@ class enterRLE(tk.Frame):
         mButton.place(x = 490, y = 310, width = 200, height = 25)    
 
 
+
 class displayASCII(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -124,13 +125,9 @@ class displayASCII(tk.Frame):
                     ab = 0
             content = [x.strip() for x in content]
             message = []
-            for i in range(0, len(content)):
-                _line = []
-                for x in range(0, len(content[i]), 3):
-                    f = open(f"{fileName}.txt")
-                    fileRead = f.read()
-                    _line.append(f)
-            message.append(''.join(_line))
+            f = open(f"{fileName}.txt")
+            fileRead = f.read()
+            message.append(''.join(fileRead))
             message = '\n'.join(message)
 
             
@@ -148,7 +145,9 @@ class displayASCII(tk.Frame):
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: controller.show_frame("MainMenu"))
-        mButton.place(x = 490, y = 310, width = 200, height = 25) 
+        mButton.place(x = 490, y = 310, width = 200, height = 25)    
+
+
 
 class convToASCII(tk.Frame):
 

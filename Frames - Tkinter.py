@@ -12,6 +12,7 @@ class SampleApp(tk.Tk):
 
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         self.title_font2 = tkfont.Font(family='Calibri', size=16)
+        self.title_fontSub = tk.font.Font(family='Bauhaus 93 Regular', size=16)
         self.title_fontOptions = tkfont.Font(family='Calibri', size=14)
         self.title_fontmainTMenu = tkfont.Font(family='Helvetica', size=20)
         
@@ -42,7 +43,7 @@ class SampleApp(tk.Tk):
             # will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("convToASCII")
+        self.show_frame("enterRLE")
 
     def show_frame(self, page_name):
         '''Show a frame for the given page name'''
@@ -88,16 +89,33 @@ class enterRLE(tk.Frame):
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
 
+        
+        subLabel = tk.Label(self, text="Please enter RLE to decompress: ", fg="darkgreen", font=controller.title_fontSub)
+        subLabel.place(x = 185, y = 100, width = 350, height = 40)
+
+        Irle = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=12)
+        Irle.pack()
+
+        
+
+        def inputRLE():
+            rle = Irle.get("1.0",END)
+            
 
 
 
 
+                    
 
+
+        submitName = tk.Button(self, text="Submit",
+                               command=lambda: inputRLE())
+        submitName.place(x = 230, y = 260, width = 250, height = 40)
+        
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: controller.show_frame("MainMenu"))
         mButton.place(x = 490, y = 310, width = 200, height = 25)    
-
 
 
 class displayASCII(tk.Frame):
@@ -108,9 +126,11 @@ class displayASCII(tk.Frame):
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
 
+        subLabel = tk.Label(self, text="Please enter ASCII file to display: ", fg="darkgreen", font=controller.title_fontSub)
+        subLabel.place(x = 185, y = 100, width = 350, height = 40)
 
         IfileName = tk.Entry(self)
-        IfileName.place(x = 230, y = 125, width = 250, height = 40)
+        IfileName.place(x = 230, y = 145, width = 250, height = 40)
         
         def displayAS():
             ab = 1
@@ -154,15 +174,18 @@ class convToASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="Decompress to ASCII", fg="darkred", font=controller.title_fontmainTMenu)
-        label.pack(side="top", fill="x", pady=10)
+        titleLabel = tk.Label(self, text="Decompress to ASCII", fg="darkred", font=controller.title_fontmainTMenu)
+        titleLabel.pack(side="top", fill="x", pady=10)
 
+
+        subLabel = tk.Label(self, text="Please enter RLE file to decompress: ", fg="darkgreen", font=controller.title_fontSub)
+        subLabel.place(x = 185, y = 100, width = 350, height = 40)
 
         
         IfileName = tk.Entry(self)
-        IfileName.place(x = 230, y = 125, width = 250, height = 40)
+        IfileName.place(x = 230, y = 145, width = 250, height = 40)
         
-        def compressP():
+        def decompressP():
             fileName = IfileName.get()
             ab = 1
             while ab == 1:
@@ -180,7 +203,7 @@ class convToASCII(tk.Frame):
                 for x in range(0, len(content[i]), 3):
                     row = str(int(content[i][x:x + 2]) * content[i][x + 2])
                     _line.append(row)
-                message.append('\n'.join(_line))
+                message.append(''.join(_line))
             message = '\n'.join(message)
 
             asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
@@ -198,23 +221,76 @@ class convToASCII(tk.Frame):
                            command=lambda: controller.show_frame("MainMenu"))
         mButton.place(x = 490, y = 310, width = 200, height = 25)
 
+
+
+
 class convToRLE(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
-        label.pack(side="top", fill="x", pady=10)
+        titleLabel = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
+        titleLabel.pack(side="top", fill="x", pady=10)
 
 
+        subLabel = tk.Label(self, text="Please enter ASCII file to compress: ", fg="darkgreen", font=controller.title_fontSub)
+        subLabel.place(x = 185, y = 100, width = 350, height = 40)
 
 
+        IfileName = tk.Entry(self)
+        IfileName.place(x = 230, y = 145, width = 250, height = 40)
 
 
+        def compressP():
+            fileName = IfileName.get()
+            rle1 = []
+            numletters = 0
+            numletters1 = 0
+            ab = 1
+            while ab == 1:
+                try:
+                    with open(f"{fileName}.txt") as f:
+                        content = f.readlines()#Opens file
+                    ab = 0
+                except (FileNotFoundError, OSError):
+                    noFile = tk.messagebox.showerror(title="No File", message="No file found - Please enter the name of the RLE file: ")
+                    ab = 0
+                    fileName = IfileName.get()
+            content = [x.strip() for x in content]
+            for i in range(0,len(content)):
+                    numletters1 += len(content[i])
+                    count = 0
+                    rle = ""
+                    for x in range(1,len(content[i])):
+                        count += 1
+                        if content[i][x] != content[i][x-1]:
+                            count1 = count
+                            count = 0
+                            if count1 < 10:
+                                input1 = "0" + str(count1)
+                            else:
+                                input1 = str(count1)
+                            rle = rle + (input1+content[i][x-1])
+                    rle = rle + ("01"+content[i][len(content[i])-1])#Compresses data
+                    numletters += len(rle)
+                    rle1.append(rle)
+                    rle1.append("\n")
+            nameNewRLE = (f"{fileName} - COMPRESSED VERSION")
+            file1 = open(f"{nameNewRLE}.txt","w+")
+            for i in range(len(rle1)):
+                file1.write(rle1[i])
+            file1.close()
+            message = f"\nThe Name Of Your Compressed File is '{nameNewRLE}.txt'\nThe Compressed (RLE) version of the original file conta0ins {numletters} characters\n\
+The Original uncompressed (ASCII) version of the file contains {numletters1} characters\n\
+The difference in characters between the RLE file and the ASCII file is: {numletters1 - numletters}"
+                    
+            asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=80, height=14)
+            asciiShown.insert('1.0', message)
+            asciiShown.pack()
 
-
-
-
+        submitName = tk.Button(self, text="Submit",
+                               command=lambda: compressP())
+        submitName.place(x = 230, y = 200, width = 250, height = 40)     
 
         
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
@@ -230,3 +306,4 @@ class convToRLE(tk.Frame):
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
+

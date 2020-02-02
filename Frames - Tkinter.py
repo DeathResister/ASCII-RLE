@@ -102,8 +102,62 @@ class enterRLE(tk.Frame):
             rle = Irle.get("1.0",END)
             
 
-
-
+            
+         
+'''      CODE THAT MAKES IT WORK IN PYTHON - NEED TO ADAPT TO Tkinter      
+def enterRLE():
+    startRLE = True
+    while startRLE == True:
+        try:
+            numLines = int(input("How many lines of RLE data do you want to decompress to ASCII? "))
+            if numLines < 1000000000:
+                startRLE = False
+        except ValueError:
+            print("Please enter a number greater than 2: ")
+            startRLE = True
+                
+    while numLines < 3:
+        startRLE = True
+        while startRLE == True:
+            try:
+                numLines = int(input("\n(Please enter a number > 3)\nHow many lines of RLE do you want to decompress?: "))
+                if numLines < 1000000000:
+                    startRLE = False
+            except ValueError:
+                startRLE = True
+    rle = []
+    startR = True
+    while startR == True:
+        try:
+            rle = []
+            for i in range(0,numLines):
+                rle.append(input("Enter compressed data (every line seperately): "))
+            for i in range(0, len(rle)):
+                for x in range(0, len(rle[i]), 3):
+                    print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
+                    startR = False
+                print()
+            print("\n")
+            mainMenu()
+        except (IndexError, ValueError):
+            print("Try Again")            
+            
+'''            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
                     
 

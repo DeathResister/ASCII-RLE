@@ -132,6 +132,7 @@ class displayASCII(tk.Frame):
         IfileName = tk.Entry(self)
         IfileName.place(x = 230, y = 145, width = 250, height = 40)
         
+        
         def displayAS():
             ab = 1
             fileName = IfileName.get()
@@ -151,8 +152,6 @@ class displayASCII(tk.Frame):
             message = '\n'.join(message)
 
             
-
-            asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
             asciiShown.insert('1.0', message)
             asciiShown.pack()
 
@@ -161,10 +160,10 @@ class displayASCII(tk.Frame):
                                command=lambda: displayAS())
         submitName.place(x = 230, y = 200, width = 250, height = 40)
 
-
+        asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
-                           command=lambda: controller.show_frame("MainMenu"))
+                           command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
         mButton.place(x = 490, y = 310, width = 200, height = 25)    
 
 

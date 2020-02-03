@@ -180,17 +180,20 @@ class displayASCII(tk.Frame):
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
 
-        subLabel = tk.Label(self, text="Please enter ASCII file to display: ", fg="darkgreen", font=controller.title_fontSub)
+        leb = tk.Frame(self)
+        leb.pack()
+        subLabel = tk.Label(leb, text="Please enter ASCII file to display: ", fg="darkgreen", font=controller.title_fontSub)
         subLabel.place(x = 185, y = 100, width = 350, height = 40)
 
-        IfileName = tk.Entry(self)
-        IfileName.place(x = 230, y = 145, width = 250, height = 40)
+        IfileName = tk.Entry(leb)
+        IfileName.place(x = 20, y = 145, width = 250, height = 40)
 
 
-        submitName = tk.Button(self, text="Submit",
+        submitName = tk.Button(leb, text="Submit",
                                command=lambda: displayAS())
         submitName.place(x = 230, y = 200, width = 250, height = 40)
 
+        asciiShown.pack()
         asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
         
         
@@ -221,7 +224,7 @@ class displayASCII(tk.Frame):
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
-        mButton.place(x = 490, y = 310, width = 200, height = 25)    
+        mButton.place(x = 490, y = 310, width = 200, height = 25)
 
 
 

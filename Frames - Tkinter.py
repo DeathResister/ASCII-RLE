@@ -172,6 +172,7 @@ def enterRLE():
         mButton.place(x = 490, y = 310, width = 200, height = 25)    
 
 
+
 class displayASCII(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -191,7 +192,7 @@ class displayASCII(tk.Frame):
 
         submitName = tk.Button(leb, text="Submit",
                                command=lambda: displayAS())
-        submitName.place(x = 230, y = 200, width = 250, height = 40)
+        submitName.place(x = 40, y = 200, width = 250, height = 40)
 
         asciiShown.pack()
         asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
@@ -217,14 +218,15 @@ class displayASCII(tk.Frame):
 
             
             asciiShown.insert('1.0', message)
-            asciiShown.pack()
 
 
 
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
-        mButton.place(x = 490, y = 310, width = 200, height = 25)
+        mButton.place(x = 490, y = 310, width = 200, height = 25)    
+
+
 
 
 

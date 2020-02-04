@@ -56,6 +56,8 @@ class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        controller.geometry("700x575")
+        
         label = tk.Label(self, text="Welcome to Compreso!", fg="red", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         choicesL = tk.Label(self, text="Please pick an option:", fg="darkblue", font=controller.title_font2)
@@ -86,36 +88,32 @@ class enterRLE(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        controller.geometry("700x850")
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
-    
         
-        subLabel = tk.Label(self, text="Please enter RLE to decompress: ", fg="darkgreen", font=controller.title_fontSub)
-        subLabel.place(x = 185, y = 100, width = 350, height = 40)
+        leb = tk.Frame(self, height=250)
+        leb.pack(expand=True, fill=tk.BOTH, pady=10)
+        subLabel = tk.Label(leb, text="Please enter RLE to Decompress: ", fg="darkgreen", font=controller.title_fontSub)
+        subLabel.place(x = 180, y = 10, width = 350, height = 40)
 
-        Irle = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=12)
-        Irle.pack()
+##        IfileName = tk.Entry(leb)
+##        IfileName.place(x = 220, y = 80, width = 250, height = 40)
 
+
+        submitName = tk.Button(leb, text="Submit",
+                               command=lambda: displayAS())
+        submitName.place(x = 220, y = 140, width = 250, height = 40)
+
+        asciiShown = tk.Text(leb, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
+        asciiShown.place(x = 130, y = 215)        
         
 
-        def inputRLE():
-            rle = Irle.get("1.0",END)
-            
 
-
-
-
-                    
-
-
-        submitName = tk.Button(self, text="Submit",
-                               command=lambda: inputRLE())
-        submitName.place(x = 230, y = 260, width = 250, height = 40)
-        
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
-                           command=lambda: controller.show_frame("MainMenu"))
-        mButton.place(x = 490, y = 310, width = 200, height = 25)    
+                           command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
+        mButton.place(x = 490, y = 532, width = 200, height = 30)     
 
 
 class displayASCII(tk.Frame):
@@ -123,8 +121,10 @@ class displayASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        controller.geometry("700x575")
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
+        controller.geometry("700x575")
 
         leb = tk.Frame(self, height=250)
         leb.pack(expand=True, fill=tk.BOTH, pady=10)
@@ -177,8 +177,10 @@ class convToASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        controller.geometry("700x575")
         label = tk.Label(self, text="Decompress To ASCII", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
+
 
         leb = tk.Frame(self, height=250)
         leb.pack(expand=True, fill=tk.BOTH, pady=10)
@@ -236,9 +238,10 @@ class convToRLE(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        controller.geometry("700x575")
         label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
-
+        
         leb = tk.Frame(self, height=250)
         leb.pack(expand=True, fill=tk.BOTH, pady=10)
         subLabel = tk.Label(leb, text="Please enter ASCII file to compress: ", fg="darkgreen", font=controller.title_fontSub)
@@ -312,3 +315,4 @@ The difference in characters between the RLE file and the ASCII file is: {numlet
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
+

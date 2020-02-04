@@ -194,9 +194,8 @@ class displayASCII(tk.Frame):
                                command=lambda: displayAS())
         submitName.place(x = 40, y = 200, width = 250, height = 40)
 
-        asciiShown.pack()
         asciiShown = tk.Text(self, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
-        
+        asciiShown.pack()        
         
         def displayAS():
             ab = 1

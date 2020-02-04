@@ -19,7 +19,7 @@ class SampleApp(tk.Tk):
         self.title_fontDevices = tkfont.Font(family='Didot', size=13)
         self.title_fontT = tkfont.Font(family='Cambria', size=16) 
         self.title("Compreso")
-        self.geometry("700x575")
+        self.geometry("700x775")
 
         
 
@@ -56,7 +56,7 @@ class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        controller.geometry("700x575")
+#        controller.geometry("700x575")
         
         label = tk.Label(self, text="Welcome to Compreso!", fg="red", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -88,7 +88,6 @@ class enterRLE(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        controller.geometry("700x850")
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         
@@ -97,23 +96,50 @@ class enterRLE(tk.Frame):
         subLabel = tk.Label(leb, text="Please enter RLE to Decompress: ", fg="darkgreen", font=controller.title_fontSub)
         subLabel.place(x = 180, y = 10, width = 350, height = 40)
 
+        asciiInputted = tk.Text(leb, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
+        asciiInputted.place(x = 130, y = 70)
+
+        
+
 ##        IfileName = tk.Entry(leb)
 ##        IfileName.place(x = 220, y = 80, width = 250, height = 40)
 
 
         submitName = tk.Button(leb, text="Submit",
-                               command=lambda: displayAS())
-        submitName.place(x = 220, y = 140, width = 250, height = 40)
+                               command=lambda: inputRLE())
+        submitName.place(x = 220, y = 320, width = 250, height = 40)
 
-        asciiShown = tk.Text(leb, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
-        asciiShown.place(x = 130, y = 215)        
+
+        asciiShown = tk.Text(leb, font=('Consolas', 10), wrap="none", state="disabled", borderwidth=0, width=64, height=14)
+        asciiShown.place(x = 130, y = 400)
         
+        
+        def inputRLE():
+            rle = asciiInputted.get("1.0")
+            startR = True
+            while startR == True:
+                try:
+                    rle = []
+                    for i in range(0, len(rle)):
+                        for x in range(0, len(rle[i]), 3):
+                            print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
+                            startR = False
+                            message = []
+                        print()
+                    message = '\n'.join(message)
+                    mainMenu()
+                    asciiShown.insert('1.0', message)
+                except (IndexError, ValueError):
+                    noFile = tk.messagebox.showerror(title="Error", message="Please Try Again")
 
+            
+
+        
 
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
-        mButton.place(x = 490, y = 532, width = 200, height = 30)     
+        mButton.place(x = 490, y = 736, width = 200, height = 30)    
 
 
 class displayASCII(tk.Frame):
@@ -121,7 +147,7 @@ class displayASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        controller.geometry("700x575")
+#        controller.geometry("700x575")
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         controller.geometry("700x575")
@@ -177,7 +203,7 @@ class convToASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        controller.geometry("700x575")
+#        controller.geometry("700x575")
         label = tk.Label(self, text="Decompress To ASCII", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
 
@@ -238,7 +264,7 @@ class convToRLE(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        controller.geometry("700x575")
+#        controller.geometry("700x575")
         label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         

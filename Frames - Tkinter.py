@@ -56,6 +56,7 @@ class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
+        self.geometry(frame.geometry)
         self.controller = controller
         
         label = tk.Label(self, text="Welcome to Compreso!", fg="red", font=controller.title_fontmainTMenu)
@@ -88,6 +89,7 @@ class enterRLE(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x775"
+        self.geometry(frame.geometry)
         self.controller = controller
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -120,14 +122,12 @@ class enterRLE(tk.Frame):
             print('rel:{}'.format(rle))
             message = []
             try:
-                rle = []
                 for i in range(0, len(rle)):
-                    for x in range(0, len(rle[i]), 3):
+                    for x in range(0, len(rle[i]), 3): 
                         print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
-                        startR = False
+                        asciiShown.insert(tk.END, str(int(rle[i][x:x+2]) * rle[i][x+2]))
                     print()
-                message = '\n'.join(message)
-                asciiShown.insert('1.0', message)
+                #message = '\n'.join(message)
             except (IndexError, ValueError):
                 noFile = tk.messagebox.showerror(title="Error", message="Please Try Again")
 
@@ -146,6 +146,7 @@ class displayASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
+        self.geometry(frame.geometry)
         self.controller = controller
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -201,6 +202,7 @@ class convToASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
+        self.geometry(frame.geometry)
         self.controller = controller
         label = tk.Label(self, text="Decompress To ASCII", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -251,7 +253,7 @@ class convToASCII(tk.Frame):
 
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
-                           command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
+                           command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END),])
         mButton.place(x = 490, y = 532, width = 200, height = 30)
 
 
@@ -262,6 +264,7 @@ class convToRLE(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
+        self.geometry(frame.geometry)
         self.controller = controller
         label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)

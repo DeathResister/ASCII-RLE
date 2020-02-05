@@ -82,7 +82,6 @@ class MainMenu(tk.Frame):
         
                                                                 
 
-
 class enterRLE(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -116,21 +115,19 @@ class enterRLE(tk.Frame):
         
         def inputRLE():
             rle = asciiInputted.get("1.0")
-            startR = True
-            while startR == True:
-                try:
-                    rle = []
-                    for i in range(0, len(rle)):
-                        for x in range(0, len(rle[i]), 3):
-                            print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
-                            startR = False
-                            message = []
-                        print()
-                    message = '\n'.join(message)
-                    mainMenu()
-                    asciiShown.insert('1.0', message)
-                except (IndexError, ValueError):
-                    noFile = tk.messagebox.showerror(title="Error", message="Please Try Again")
+            print('rel:{}'.format(rle))
+            message = []
+            try:
+                rle = []
+                for i in range(0, len(rle)):
+                    for x in range(0, len(rle[i]), 3):
+                        print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
+                        startR = False
+                    print()
+                message = '\n'.join(message)
+                asciiShown.insert('1.0', message)
+            except (IndexError, ValueError):
+                noFile = tk.messagebox.showerror(title="Error", message="Please Try Again")
 
             
 
@@ -139,7 +136,7 @@ class enterRLE(tk.Frame):
 
         mButton = tk.Button(self, text="Go to the Main Menu", fg="red",
                            command=lambda: [controller.show_frame("MainMenu"), asciiShown.delete(1.0, tk.END)])
-        mButton.place(x = 490, y = 736, width = 200, height = 30)    
+        mButton.place(x = 490, y = 736, width = 200, height = 30)     
 
 
 class displayASCII(tk.Frame):

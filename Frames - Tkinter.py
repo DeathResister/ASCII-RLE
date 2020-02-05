@@ -19,7 +19,7 @@ class SampleApp(tk.Tk):
         self.title_fontDevices = tkfont.Font(family='Didot', size=13)
         self.title_fontT = tkfont.Font(family='Cambria', size=16) 
         self.title("Compreso")
-        self.geometry = "700x850"
+        self.geometry("700x775")
 
         
 
@@ -87,7 +87,7 @@ class enterRLE(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.geometry = "700x850"
+        self.geometry = "700x775"
         self.controller = controller
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -339,4 +339,9 @@ The difference in characters between the RLE file and the ASCII file is: {numlet
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
+
+
+
+
+
 

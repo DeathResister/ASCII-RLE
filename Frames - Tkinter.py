@@ -19,12 +19,12 @@ class SampleApp(tk.Tk):
         self.title_fontDevices = tkfont.Font(family='Didot', size=13)
         self.title_fontT = tkfont.Font(family='Cambria', size=16) 
         self.title("Compreso")
-        self.geometry("700x775")
+        self.geometry = "700x850"
 
         
 
         
-        # the container is where we'll stack a bunch of frames
+        # the container is where we'll stack a bunch of frmes
         # on top of each other, then the one we want visible
         # will be raised above the others
         container = tk.Frame(self)
@@ -43,7 +43,7 @@ class SampleApp(tk.Tk):
             # will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("displayASCII")
+        self.show_frame("MainMenu")
 
     def show_frame(self, page_name):
         '''Show a frame for the given page name'''
@@ -55,8 +55,8 @@ class MainMenu(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.geometry = "700x575"
         self.controller = controller
-#        controller.geometry("700x575")
         
         label = tk.Label(self, text="Welcome to Compreso!", fg="red", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -82,10 +82,12 @@ class MainMenu(tk.Frame):
         
                                                                 
 
+
 class enterRLE(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.geometry = "700x850"
         self.controller = controller
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -114,7 +116,7 @@ class enterRLE(tk.Frame):
         
         
         def inputRLE():
-            rle = asciiInputted.get("1.0")
+            rle = asciiInputted.get("1.0", tk.END)
             print('rel:{}'.format(rle))
             message = []
             try:
@@ -143,11 +145,10 @@ class displayASCII(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.geometry = "700x575"
         self.controller = controller
-#        controller.geometry("700x575")
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
-        controller.geometry("700x575")
 
         leb = tk.Frame(self, height=250)
         leb.pack(expand=True, fill=tk.BOTH, pady=10)
@@ -199,8 +200,8 @@ class convToASCII(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.geometry = "700x575"
         self.controller = controller
-#        controller.geometry("700x575")
         label = tk.Label(self, text="Decompress To ASCII", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
 
@@ -260,8 +261,8 @@ class convToRLE(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.geometry = "700x575"
         self.controller = controller
-#        controller.geometry("700x575")
         label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         

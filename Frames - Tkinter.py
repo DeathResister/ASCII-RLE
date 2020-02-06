@@ -87,10 +87,8 @@ class MainMenu(tk.Frame):
 class enterRLE(tk.Frame):
 
     def __init__(self, parent, controller):
-        self.geometry(frame.geometry)
         tk.Frame.__init__(self, parent)
         self.geometry = "700x775"
-        self.geometry(frame.geometry)
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         
@@ -119,14 +117,14 @@ class enterRLE(tk.Frame):
         
         def inputRLE():
             rle = asciiInputted.get("1.0", tk.END)
-            print('rel:{}'.format(rle))
+##            print('rel:{}'.format(rle))
             message = []
+            content = asciiInputted.get("1.0", tk.END)
+            rle = [x.strip() for x in content.split('\n')]
             try:
                 for i in range(0, len(rle)):
                     for x in range(0, len(rle[i]), 3): 
                         print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
-                        content = asciiInputted.get("1.0", tk.END)
-                        rle = [x.strip() for x in content]
                         asciiShown.insert(tk.END, str(int(rle[i][x:x+2]) * rle[i][x+2]))
                     print()
                 #message = '\n'.join(message)

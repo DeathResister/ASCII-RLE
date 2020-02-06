@@ -52,7 +52,7 @@ class SampleApp(tk.Tk):
 
 
 class MainMenu(tk.Frame):
-
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
@@ -87,10 +87,10 @@ class MainMenu(tk.Frame):
 class enterRLE(tk.Frame):
 
     def __init__(self, parent, controller):
+        self.geometry(frame.geometry)
         tk.Frame.__init__(self, parent)
         self.geometry = "700x775"
         self.geometry(frame.geometry)
-        self.controller = controller
         label = tk.Label(self, text="Enter RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
         
@@ -125,6 +125,8 @@ class enterRLE(tk.Frame):
                 for i in range(0, len(rle)):
                     for x in range(0, len(rle[i]), 3): 
                         print(int(rle[i][x:x+2]) * rle[i][x+2], end="")
+                        content = asciiInputted.get("1.0", tk.END)
+                        rle = [x.strip() for x in content]
                         asciiShown.insert(tk.END, str(int(rle[i][x:x+2]) * rle[i][x+2]))
                     print()
                 #message = '\n'.join(message)
@@ -142,7 +144,7 @@ class enterRLE(tk.Frame):
 
 
 class displayASCII(tk.Frame):
-
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
@@ -198,7 +200,6 @@ class displayASCII(tk.Frame):
 
 
 class convToASCII(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
@@ -260,11 +261,10 @@ class convToASCII(tk.Frame):
 
 
 class convToRLE(tk.Frame):
-
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
         self.geometry(frame.geometry)
+        tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -342,7 +342,6 @@ The difference in characters between the RLE file and the ASCII file is: {numlet
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
-
 
 
 

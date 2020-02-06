@@ -56,7 +56,6 @@ class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
-        self.geometry(frame.geometry)
         self.controller = controller
         
         label = tk.Label(self, text="Welcome to Compreso!", fg="red", font=controller.title_fontmainTMenu)
@@ -111,7 +110,7 @@ class enterRLE(tk.Frame):
         submitName.place(x = 220, y = 320, width = 250, height = 40)
 
 
-        asciiShown = tk.Text(leb, font=('Consolas', 10), wrap="none", state="disabled", borderwidth=0, width=64, height=14)
+        asciiShown = tk.Text(leb, font=('Consolas', 10), wrap="none", borderwidth=0, width=64, height=14)
         asciiShown.place(x = 130, y = 400)
         
         
@@ -146,7 +145,6 @@ class displayASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
-        self.geometry(frame.geometry)
         self.controller = controller
         label = tk.Label(self, text="Display ASCII Art", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -201,7 +199,6 @@ class convToASCII(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.geometry = "700x575"
-        self.geometry(frame.geometry)
         self.controller = controller
         label = tk.Label(self, text="Decompress To ASCII", fg="darkred", font=controller.title_fontmainTMenu)
         label.pack(side="top", fill="x", pady=10)
@@ -261,7 +258,6 @@ class convToASCII(tk.Frame):
 class convToRLE(tk.Frame):
     def __init__(self, parent, controller):
         self.geometry = "700x575"
-        self.geometry(frame.geometry)
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="Compress To RLE", fg="darkred", font=controller.title_fontmainTMenu)
@@ -340,8 +336,6 @@ The difference in characters between the RLE file and the ASCII file is: {numlet
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
-
-
 
 
 
